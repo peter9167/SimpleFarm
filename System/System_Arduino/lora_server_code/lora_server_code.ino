@@ -95,7 +95,9 @@ void loop()
       humi = (float)(humiBuf / 100);
       temp = (float)(tempBuf / 100);
 
+      Serial.print("Humi : ");
       Serial.println(humi);
+      Serial.print("Temp : ");
       Serial.println(temp);
       
     }
