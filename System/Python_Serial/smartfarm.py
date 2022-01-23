@@ -21,10 +21,10 @@ def readserial():
 
 
     if len(index) == 1:
-        display1 = tk.Label(root, text=index[0], font = ("굴림체", "28")).place(x=250, y=180) # 온도 값 출력
+        display1 = tk.Label(root, text=index[0], font = ("굴림체", "28")).place(x=1050, y=290)
     elif len(index) == 2:
         # display1 = tk.Label(root,text=index[0]).place(x=10,y=10)
-        display2 = tk.Label(root, text=index[1], font = ("굴림체", "28")).place(x=250, y=300) # 습도 값 출력
+        display2 = tk.Label(root, text=index[1], font = ("굴림체", "28")).place(x=50, y=40)
 
 
 
@@ -39,11 +39,14 @@ def readserial():
 t1 = continuous_threading.PeriodicThread(0, readserial)
 
 root = tk.Tk()
-root.geometry("720x480")
+root.geometry("1920x1080")
 
 #화면 구성
 name = tk.Label(root,  height=2, text="스마트팜", font = ("굴림체", "40"))
 name.pack()
+
+humi = tk.Label(root, height=10, text="습도", font = ("굴림체", "30"))
+humi.pack()
 
 
 
