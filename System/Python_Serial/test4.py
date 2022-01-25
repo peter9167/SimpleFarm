@@ -8,7 +8,7 @@ class Application(tkinter.Frame):
         super().__init__(master)
         self.timer = None
         self.master = master
-        self.master.title("서귀포산업과학고등학교 발명반 홍경민")
+        self.master.title("서귀포산업과학고등학교 발명반")
         self.pack(fill='both', expand=True)
 
         lab = Label(root)
