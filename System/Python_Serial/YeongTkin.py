@@ -14,7 +14,16 @@ root.geometry("1280x720")
 
 index = []
 
+def Pump_On():
+    print("LED 켜기...")
+    ser.write(b'H')
+
+def Pump_Off():
+    print("LED 끄기...")
+    ser.write(b'L')
+
 class Application(tk.Frame):
+
     def __init__(self, master):
         super().__init__(master)
         self.timer = None
@@ -22,56 +31,65 @@ class Application(tk.Frame):
         self.master.title("스마트팜 모니터링 제어장치")
         self.pack(fill='both', expand=True)
 
+        # 자세한 버튼 설명 : https://076923.github.io/posts/Python-tkinter-3/
         btn = Button(root)
         btn.config(width = 8, height = 4)
         btn.configure(font = ("굴림체", 20))
-        btn.config(text = "펌프 동작")
+        btn.config(text = "펌프 동작", overrelief="solid", activebackground="green", activeforeground="white", cursor="cross_reverse")
+        btn.config(repeatdelay=1000, repeatinterval=100, command=Pump_On)
         btn.place(x = 490, y = 220)
 
 
         btn2 = Button(root)
         btn2.config(width = 8, height = 4)
         btn2.configure(font = ("굴림체", 20))
-        btn2.config(text = "펌프 정지")
+        btn2.config(text = "펌프 정지", overrelief="solid", activebackground="green", activeforeground="white", cursor="cross_reverse")
+        btn.config(repeatdelay=1000, repeatinterval=100, command=Pump_Off)
         btn2.place(x = 665, y = 220)
 
         btn3 = Button(root)
         btn3.config(width = 8, height = 4)
         btn3.configure(font = ("굴림체", 20))
-        btn3.config(text = "LED 동작")
+        btn3.config(text = "LED 동작", overrelief="solid", activebackground="green", activeforeground="white", cursor="cross_reverse")
+        btn.config(repeatdelay=1000, repeatinterval=100)
         btn3.place(x = 840, y = 220)
 
 
         btn4 = Button(root)
         btn4.config(width = 8, height = 4)
         btn4.configure(font = ("굴림체", 20))
-        btn4.config(text = "LED 정지")
+        btn4.config(text = "LED 정지", overrelief="solid", activebackground="green", activeforeground="white", cursor="cross_reverse")
+        btn.config(repeatdelay=1000, repeatinterval=100)
         btn4.place(x = 1015, y = 220)
 
         btn5 = Button(root)
         btn5.config(width = 8, height = 4)
         btn5.configure(font = ("굴림체", 20))
-        btn5.config(text = "FAN 동작")
+        btn5.config(text = "FAN 동작", overrelief="solid", activebackground="green", activeforeground="white", cursor="cross_reverse")
+        btn.config(repeatdelay=1000, repeatinterval=100)
         btn5.place(x = 490, y = 400)
 
 
         btn6 = Button(root)
         btn6.config(width = 8, height = 4)
         btn6.configure(font = ("굴림체", 20))
-        btn6.config(text = "FAN 정지")
+        btn6.config(text = "FAN 정지", overrelief="solid", activebackground="green", activeforeground="white", cursor="cross_reverse")
+        btn.config(repeatdelay=1000, repeatinterval=100)
         btn6.place(x = 665, y = 400)
 
         btn7 = Button(root)
         btn7.config(width = 8, height = 4)
         btn7.configure(font = ("굴림체", 20))
-        btn7.config(text = "")
+        btn7.config(text = "", overrelief="solid", activebackground="green", activeforeground="white", cursor="cross_reverse")
+        btn.config(repeatdelay=1000, repeatinterval=100)
         btn7.place(x = 840, y = 400)
 
 
         btn8 = Button(root)
         btn8.config(width = 8, height = 4)
         btn8.configure(font = ("굴림체", 20))
-        btn8.config(text = "")
+        btn8.config(text = "", overrelief="solid", activebackground="green", activeforeground="white", cursor="cross_reverse")
+        btn.config(repeatdelay=1000, repeatinterval=100)
         btn8.place(x = 1015, y = 400)
 
         now = time.strftime("%Y년 %m월 %d일 %H시 %M분 %S초")

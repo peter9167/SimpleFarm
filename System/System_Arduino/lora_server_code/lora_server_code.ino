@@ -1,6 +1,8 @@
 #include <SPI.h>
 #include <RH_RF95.h>
 
+#include <TimerOne.h>
+
 #define RFM95_CS 10
 #define RFM95_RST 7
 #define RFM95_INT 2
@@ -11,9 +13,17 @@
 // Singleton instance of the radio driver
 RH_RF95 rf95(RFM95_CS, RFM95_INT);
 
+const int ledPin = 13; // the pin that the LED is attached to
+int incomingByte;      // a variable to read incoming serial data into
+
 //-------------------[_SETUP & INITIALIZE_]----------------------//
 void setup() 
 {   
+  pinMode(ledPin, OUTPUT);
+
+  Timer1.initialize(250000); //1000000μs = 1s, 1000us = 0.001s, 1000us = 1ms
+  Timer1.attachInterrupt(timerIsr);
+  
   pinMode(RFM95_RST, OUTPUT);
   digitalWrite(RFM95_RST, HIGH);
 
@@ -49,11 +59,13 @@ void setup()
   // you can set transmitter powers from 5 to 23 dBm:
   
   rf95.setTxPower(23, false);
+
+  
 }
 
 //-------------------[_LOOP & PROCESSING_]----------------------//
 void loop()
-{
+{ 
   if (rf95.available())
   { 
     uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
@@ -99,11 +111,32 @@ void loop()
       Serial.println(humi);
       Serial.print("Temp : ");
       Serial.println(temp);
+
       
     }
     else
     {
       Serial.println("Receive failed");
+    }
+  }
+}
+
+void timerIsr(){
+  if (Serial.available() > 0)
+  {
+    incomingByte = Serial.read();
+    if (incomingByte == 'H') {
+      // Send a reply --> 클라이언트로 데이터 수신에 대한 확답을 보낸다.
+      uint8_t data[] = "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH";
+      rf95.send(data, sizeof(data));
+      rf95.waitPacketSent();
+      //Serial.println("Sent a reply");
+      Serial.println("HIGH");
+    }
+    // if it's an L (ASCII 76) turn off the LED:
+    if (incomingByte == 'L') {
+      digitalWrite(ledPin, LOW);
+      Serial.println("LOW");
     }
   }
 }
