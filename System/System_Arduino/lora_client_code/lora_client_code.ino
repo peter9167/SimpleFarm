@@ -1,6 +1,7 @@
 #include <SPI.h>
 #include <RH_RF95.h>
 #include <DHT11.h>
+#include <TimerOne.h>
 
 #define RFM95_CS      10
 #define RFM95_RST     7
@@ -13,6 +14,9 @@
 // Singleton instance of the radio driver
 RH_RF95 rf95(RFM95_CS, RFM95_INT);
 
+const int ledPin = 5; // 사용가능한 핀 (3, 4, 5, 6, 8)
+int incomingByte;      // a variable to read incoming serial data into
+
 //------------------------------------------------------
 #define DH11pin     9
 DHT11 dht11(DH11pin);
@@ -20,6 +24,11 @@ DHT11 dht11(DH11pin);
 
 void setup() 
 {
+  pinMode(ledPin, OUTPUT);
+
+  Timer1.initialize(250000); //1000000μs = 1s, 1000us = 0.001s, 1000us = 1ms
+  Timer1.attachInterrupt(timerIsr);
+  
   pinMode(RFM95_RST, OUTPUT);
   digitalWrite(RFM95_RST, HIGH);
 
@@ -82,7 +91,7 @@ void loop()
   String humiStr = String(humi);
   String tempStr = String(temp);
   
-  Serial.println("Sending to rf95_server");
+//  Serial.println("Sending to rf95_server");
   // Send a message to rf95_server
 
   String radiopacket = humiStr; //"Hello World #";
@@ -95,7 +104,7 @@ void loop()
   delay(10);
   rf95.send((uint8_t*)radiopacket.c_str(), radiopacket.length()+1);
 
-  Serial.println("Waiting for packet to complete..."); 
+//  Serial.println("Waiting for packet to complete..."); 
   delay(10);
   rf95.waitPacketSent();
   
@@ -103,7 +112,7 @@ void loop()
   uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
   uint8_t len = sizeof(buf);
 
-  Serial.println("Waiting for reply..."); 
+//  Serial.println("Waiting for reply..."); 
   delay(10);
   
   if (rf95.waitAvailableTimeout(1000))
@@ -114,7 +123,16 @@ void loop()
       Serial.print("Got reply: ");
       Serial.println((char*)buf);
       Serial.print("RSSI: ");
-      Serial.println(rf95.lastRssi(), DEC);    
+      Serial.println(rf95.lastRssi(), DEC);
+      // char*을 String 형으로 변경하여 비교해야 함.
+      if((char*)buf == "0"){
+        digitalWrite(3, HIGH);
+        Serial.println("0");
+      } 
+      else if((char*)buf == "1") {
+        digitalWrite(3, LOW);
+        Serial.println("1");
+      }
     }
     else
     {
@@ -127,4 +145,8 @@ void loop()
   }
   
   delay(10000); 
+}
+
+void timerIsr(){
+  
 }

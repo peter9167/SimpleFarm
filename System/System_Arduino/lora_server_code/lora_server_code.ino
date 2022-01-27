@@ -13,8 +13,10 @@
 // Singleton instance of the radio driver
 RH_RF95 rf95(RFM95_CS, RFM95_INT);
 
-const int ledPin = 13; // the pin that the LED is attached to
+const int ledPin = 3; // 사용가능한 핀 (3, 4, 5, 6, 8)
 int incomingByte;      // a variable to read incoming serial data into
+
+String rf_send = "#";
 
 //-------------------[_SETUP & INITIALIZE_]----------------------//
 void setup() 
@@ -80,8 +82,9 @@ void loop()
       //Serial.println(rf95.lastRssi(), DEC);
 
       // Send a reply --> 클라이언트로 데이터 수신에 대한 확답을 보낸다.
-      uint8_t data[] = "And hello back to you";
-      rf95.send(data, sizeof(data));
+      delay(10);
+      rf95.send((uint8_t*)rf_send.c_str(), rf_send.length()+1);
+      delay(10);
       rf95.waitPacketSent();
       //Serial.println("Sent a reply");
 
@@ -125,18 +128,14 @@ void timerIsr(){
   if (Serial.available() > 0)
   {
     incomingByte = Serial.read();
-    if (incomingByte == 'H') {
-      // Send a reply --> 클라이언트로 데이터 수신에 대한 확답을 보낸다.
-      uint8_t data[] = "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH";
-      rf95.send(data, sizeof(data));
-      rf95.waitPacketSent();
-      //Serial.println("Sent a reply");
-      Serial.println("HIGH");
+    if (incomingByte == '0') {
+      digitalWrite(ledPin, HIGH);
+      rf_send = "0";
     }
     // if it's an L (ASCII 76) turn off the LED:
-    if (incomingByte == 'L') {
+    if (incomingByte == '1') {
       digitalWrite(ledPin, LOW);
-      Serial.println("LOW");
+      rf_send = "1";
     }
   }
 }
