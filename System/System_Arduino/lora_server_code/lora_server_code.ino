@@ -13,16 +13,13 @@
 // Singleton instance of the radio driver
 RH_RF95 rf95(RFM95_CS, RFM95_INT);
 
-const int ledPin = 3; // 사용가능한 핀 (3, 4, 5, 6, 8)
 int incomingByte;      // a variable to read incoming serial data into
 
 String rf_send = "#";
 
 //-------------------[_SETUP & INITIALIZE_]----------------------//
 void setup() 
-{   
-  pinMode(ledPin, OUTPUT);
-
+{
   Timer1.initialize(250000); //1000000μs = 1s, 1000us = 0.001s, 1000us = 1ms
   Timer1.attachInterrupt(timerIsr);
   
@@ -129,12 +126,10 @@ void timerIsr(){
   {
     incomingByte = Serial.read();
     if (incomingByte == '0') {
-      digitalWrite(ledPin, HIGH);
       rf_send = "0";
     }
     // if it's an L (ASCII 76) turn off the LED:
     if (incomingByte == '1') {
-      digitalWrite(ledPin, LOW);
       rf_send = "1";
     }
   }

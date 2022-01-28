@@ -122,15 +122,16 @@ void loop()
    {
       Serial.print("Got reply: ");
       Serial.println((char*)buf);
+      Serial.println(buf[0]);
       Serial.print("RSSI: ");
       Serial.println(rf95.lastRssi(), DEC);
       // char*을 String 형으로 변경하여 비교해야 함.
-      if((char*)buf == "0"){
-        digitalWrite(3, HIGH);
+      if(buf[0] == 48){
+        digitalWrite(ledPin, HIGH);
         Serial.println("0");
       } 
-      else if((char*)buf == "1") {
-        digitalWrite(3, LOW);
+      else if(buf[0] == 49) {
+        digitalWrite(ledPin, LOW);
         Serial.println("1");
       }
     }
