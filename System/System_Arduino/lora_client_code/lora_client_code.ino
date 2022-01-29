@@ -14,7 +14,9 @@
 // Singleton instance of the radio driver
 RH_RF95 rf95(RFM95_CS, RFM95_INT);
 
-const int ledPin = 5; // 사용가능한 핀 (3, 4, 5, 6, 8)
+const int Pump_Pin = 3; // 사용가능한 핀 (3, 4, 5, 6, 8)
+const int LED_Pin = 4;
+const int Fan_Pin = 5;
 int incomingByte;      // a variable to read incoming serial data into
 
 //------------------------------------------------------
@@ -24,7 +26,9 @@ DHT11 dht11(DH11pin);
 
 void setup() 
 {
-  pinMode(ledPin, OUTPUT);
+  pinMode(Pump_Pin, OUTPUT);
+  pinMode(LED_Pin, OUTPUT);
+  pinMode(Fan_Pin, OUTPUT);
 
   Timer1.initialize(250000); //1000000μs = 1s, 1000us = 0.001s, 1000us = 1ms
   Timer1.attachInterrupt(timerIsr);
@@ -125,14 +129,30 @@ void loop()
       Serial.println(buf[0]);
       Serial.print("RSSI: ");
       Serial.println(rf95.lastRssi(), DEC);
-      // char*을 String 형으로 변경하여 비교해야 함.
-      if(buf[0] == 48){
-        digitalWrite(ledPin, HIGH);
-        Serial.println("0");
+      // buf[0] : server에서 전달된 문자 아스키코드(ASCLL) 값을 숫자로 변경됨.
+      if(buf[0] == 48){ // server에서 문자 0을 전달받아서 48로 비교
+        digitalWrite(Pump_Pin, HIGH);
+        Serial.println("server_send : 0 -> Pump HIGH");
       } 
-      else if(buf[0] == 49) {
-        digitalWrite(ledPin, LOW);
-        Serial.println("1");
+      if(buf[0] == 49) { // server에서 문자 1을 전달받아서 49로 비교
+        digitalWrite(Pump_Pin, LOW);
+        Serial.println("server_send : 1 -> Pump LOW");
+      }
+      if(buf[0] == 50) { // server에서 문자 2를 전달받아서 50로 비교
+        digitalWrite(LED_Pin, HIGH);
+        Serial.println("server_send : 2 -> LED HIGH");
+      }
+      if(buf[0] == 51) { // server에서 문자 3을 전달받아서 51로 비교
+        digitalWrite(LED_Pin, LOW);
+        Serial.println("server_send : 3 -> LED LOW");
+      }
+      if(buf[0] == 52) { // server에서 문자 4를 전달받아서 52로 비교
+        digitalWrite(Fan_Pin, HIGH);
+        Serial.println("server_send : 4 -> Fan LOW");
+      }
+      if(buf[0] == 53) { // server에서 문자 5을 전달받아서 53로 비교
+        digitalWrite(Fan_Pin, LOW);
+        Serial.println("server_send : 5 -> Fan LOW");
       }
     }
     else

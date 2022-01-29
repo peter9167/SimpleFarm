@@ -128,9 +128,20 @@ void timerIsr(){
     if (incomingByte == '0') {
       rf_send = "0";
     }
-    // if it's an L (ASCII 76) turn off the LED:
     if (incomingByte == '1') {
       rf_send = "1";
+    }
+    if (incomingByte == '2') {
+      rf_send = "2";
+    }
+    if (incomingByte == '3') {
+      rf_send = "3";
+    }
+    if (incomingByte == '4') {
+      rf_send = "4";
+    }
+    if (incomingByte == '5') {
+      rf_send = "5";
     }
   }
 }
