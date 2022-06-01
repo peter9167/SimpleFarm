@@ -1,56 +1,50 @@
 nav{ 
-    font-size: 12pt; /* 폰트 크기 */
+    font-size: 15pt; /* 폰트 크기 */
     font-family: 'PT Sans', Arial, Sans-serif; /* 폰트 글꼴 */
     position: relative; /* relative : 요소 자기 자신의 원래 위치(static일 때의 위치)를 기준으로 배치 */
 }
-
 nav ul{
     padding: 0;
     margin: 0 auto;
     width: auto;
 }
-
-nav li{}
-
+.logo{
+    width: 10%; 
+    padding-right: 1%;
+    display: inline-block;
+    vertical-align: middle;
+}
 nav a{
     line-height: 50px;
     height: 50px;
 }
-
 nav li a{
     box-sizing: border-box; /*너비와 높이에 패딩과 테두리가 포함*/
 }
-
 nav li:last-child a{
     border-right: 0;
-    }
-
-nav a:hover, nav a:active{} /* 활성화된 모든 <a> 태그를 선택 */
-
+}
 ul{
     /*list-style-type: none;*/
     background-color: #333;
     text-align: center;
 }
-
 li{
     /*position: relative;*/
-    display: inline-block;
+    display: inline-block; 
 }
-
 li a{
     color: #FFFFFF;
+    vertical-align: middle;
     text-align: center; /*블록 요소나 표의 칸 상자의 가로 정렬을 설정, 인라인 콘텐츠를 줄 상자의 가운데로 정렬합니다.*/
     padding: 14.5px 16px;
     text-decoration: none;
 }
-
 li a:hover{ /* :hover = 가르키고 있는 태그에 마우스 커서를 올려놓았을 때 실행 */
     /*color: #597812;*/
     color: #FFD400;
     font-weight:normal; /* 폰트 크기 기본 설정 */
 }
-
 .menu {
     width: 5000px;
     height: 50px;
@@ -60,4 +54,36 @@ li a:hover{ /* :hover = 가르키고 있는 태그에 마우스 커서를 올려
     background-size: cover; /* 배경 이미지 크기 설정, 이미지가 찌그러지지 않는 한도 내에서 제일 크게 설정. 이미지의 가로세로비가 요소와 다르다면 이미지를 세로 또는 가로방향으로 잘라내어 빈 공간이 생기지 않도록 설정 */
     background-color: #333333;color: white;
     z-index: 1; /* 속성 우선순위 설정*/
+}
+
+.container {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    background-image: url('img/background-img.webp');
+    color: white;
+}
+
+.welcome {
+    font-size: 15pt; /* 폰트 크기 */
+    font-family: 'PT Sans', Arial, Sans-serif; /* 폰트 글꼴 */
+    position: relative; /* relative : 요소 자기 자신의 원래 위치(static일 때의 위치)를 기준으로 배치 */
+    padding: 10px;
+}
+
+.welcome_title {
+    font-size: 20pt; /* 폰트 크기 */
+    font-family: 'PT Sans', Arial, Sans-serif; /* 폰트 글꼴 */
+    position: relative; /* relative : 요소 자기 자신의 원래 위치(static일 때의 위치)를 기준으로 배치 */
+}
+
+.Subscribe_btn {
+    font-size: 15pt; /* 폰트 크기 */
+    font-family: 'PT Sans', Arial, Sans-serif; /* 폰트 글꼴 */
+    padding: 10px 15px;
+    margin: 15px;
+    background-color: #FFD400;
+    border-radius: 10px;
 }
