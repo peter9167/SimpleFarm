@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <p id="one">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus veniam doloremque expedita labore deleniti exercitationem, ab reprehenderit voluptatem aliquid tempora laboriosam sequi facere, consectetur qui id officiis nesciunt, asperiores aut eos! Aut corporis quisquam excepturi ducimus, voluptates aliquid officiis iste autem veritatis ullam unde consectetur magnam modi repellat voluptas. Commodi unde architecto alias exercitationem distinctio quidem sunt quasi quod optio? Ex fugiat deserunt veritatis! Possimus, est quae. Dolores, similique labore tempore quae suscipit hic dolorum perspiciatis rerum, voluptatum iure unde enim molestiae eos libero. Nulla ipsam fuga soluta rem assumenda similique id consequuntur? Eius officiis non, voluptatem quisquam iusto eligendi.
+        </p>
+        <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus veniam doloremque expedita labore deleniti exercitationem, ab reprehenderit voluptatem aliquid tempora laboriosam sequi facere, consectetur qui id officiis nesciunt, asperiores aut eos! Aut corporis quisquam excepturi ducimus, voluptates aliquid officiis iste autem veritatis ullam unde consectetur magnam modi repellat voluptas. Commodi unde architecto alias exercitationem distinctio quidem sunt quasi quod optio? Ex fugiat deserunt veritatis! Possimus, est quae. Dolores, similique labore tempore quae suscipit hic dolorum perspiciatis rerum, voluptatum iure unde enim molestiae eos libero. Nulla ipsam fuga soluta rem assumenda similique id consequuntur? Eius officiis non, voluptatem quisquam iusto eligendi.
+        </p>
+        <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus veniam doloremque expedita labore deleniti exercitationem, ab reprehenderit voluptatem aliquid tempora laboriosam sequi facere, consectetur qui id officiis nesciunt, asperiores aut eos! Aut corporis quisquam excepturi ducimus, voluptates aliquid officiis iste autem veritatis ullam unde consectetur magnam modi repellat voluptas. Commodi unde architecto alias exercitationem distinctio quidem sunt quasi quod optio? Ex fugiat deserunt veritatis! Possimus, est quae. Dolores, similique labore tempore quae suscipit hic dolorum perspiciatis rerum, voluptatum iure unde enim molestiae eos libero. Nulla ipsam fuga soluta rem assumenda similique id consequuntur? Eius officiis non, voluptatem quisquam iusto eligendi.
+        </p>
+        <script>
+            if(location.hash) {
+                console.log(location.hash.substr(1));
+            } else {
+            // Fragment doesn't exist
+            }
+        </script>
+    </body>
+</html>
