@@ -61,29 +61,32 @@ li a:hover{ /* :hover = 가르키고 있는 태그에 마우스 커서를 올려
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     margin-top: 20px;
-    background-image: url('img/background-img.webp');
-    color: white;
+    height: 500px;
+    background-image: url('');
+    color: rgb(0, 0, 0);
 }
 
 .welcome {
-    font-size: 15pt; /* 폰트 크기 */
+    font-size: 30pt; /* 폰트 크기 */
     font-family: 'PT Sans', Arial, Sans-serif; /* 폰트 글꼴 */
     position: relative; /* relative : 요소 자기 자신의 원래 위치(static일 때의 위치)를 기준으로 배치 */
     padding: 10px;
 }
 
 .welcome_title {
-    font-size: 20pt; /* 폰트 크기 */
+    font-size: 40pt; /* 폰트 크기 */
     font-family: 'PT Sans', Arial, Sans-serif; /* 폰트 글꼴 */
     position: relative; /* relative : 요소 자기 자신의 원래 위치(static일 때의 위치)를 기준으로 배치 */
 }
 
 .Subscribe_btn {
-    font-size: 15pt; /* 폰트 크기 */
+    font-size: 25pt; /* 폰트 크기 */
     font-family: 'PT Sans', Arial, Sans-serif; /* 폰트 글꼴 */
     padding: 10px 15px;
-    margin: 15px;
+    margin: 20px;
+    padding: 20px;
     background-color: #FFD400;
     border-radius: 10px;
 }
