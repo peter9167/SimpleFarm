@@ -6,7 +6,7 @@ import serial
 import threading
 import continuous_threading
 
-ser = serial.Serial('COM9', 9600)
+ser = serial.Serial('COM4', 9600)
 val1 = 0
 
 root = tk.Tk()
