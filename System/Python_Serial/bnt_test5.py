@@ -7,7 +7,7 @@ window.resizable(False, False)
 
 count=0
 
-def countUP():
+def countUP(): 
     global count
     count +=1
     label.config(text=str(count))
